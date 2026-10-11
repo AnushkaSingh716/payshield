@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Node
+node_modules/
+dist/
+
+# Secrets: never commit these
+.env
+.env.*
+!.env.example
+
+# Datasets are too big for GitHub (keep the README inside the folder)
+ml/data/*
+!ml/data/README.md
+
+# MLflow run logs (local only)
+mlruns/
+mlflow.db
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
