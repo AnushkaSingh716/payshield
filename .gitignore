@@ -26,3 +26,6 @@ mlflow.db
 Thumbs.db
 .vscode/
 .idea/
+
+# Local SQLite databases
+*.db
