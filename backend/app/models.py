@@ -1,7 +1,7 @@
 """Database tables."""
 from datetime import datetime, timezone
 
-from sqlalchemy import Boolean, DateTime, Float, Integer, String
+from sqlalchemy import Boolean, DateTime, Float, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.database import Base
@@ -31,3 +31,19 @@ class Prediction(Base):
     # What the model decided
     fraud_probability: Mapped[float] = mapped_column(Float)
     label: Mapped[str] = mapped_column(String(20))  # Safe / Suspicious / Fraud
+
+
+class ScamCheck(Base):
+    """One row per message that was checked by the scam checker."""
+
+    __tablename__ = "scam_checks"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime, default=lambda: datetime.now(timezone.utc)
+    )
+    message_text: Mapped[str] = mapped_column(Text)
+    text_score: Mapped[float] = mapped_column(Float)   # from the text model, 0-100
+    link_score: Mapped[float] = mapped_column(Float)   # from the link rules, 0-100
+    risk_score: Mapped[float] = mapped_column(Float)   # final score, 0-100
+    label: Mapped[str] = mapped_column(String(20))     # Safe / Suspicious / Scam

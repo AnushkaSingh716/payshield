@@ -8,10 +8,14 @@ from dotenv import load_dotenv
 ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(ROOT / ".env")
 
-# Some hosts (like Render) give "postgres://..." but SQLAlchemy needs "postgresql://..."
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./payshield.db")
+
+# Hosts like Render give "postgres://..." and our .env uses "postgresql://...".
+# SQLAlchemy needs the driver named explicitly: "postgresql+psycopg://..."
 if DATABASE_URL.startswith("postgres://"):
-    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql+psycopg://", 1)
+elif DATABASE_URL.startswith("postgresql://"):
+    DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+psycopg://", 1)
 
 # Websites allowed to call this API (comma-separated in .env)
 ALLOWED_ORIGINS = [
@@ -19,6 +23,13 @@ ALLOWED_ORIGINS = [
     for origin in os.getenv("ALLOWED_ORIGINS", "http://localhost:5173").split(",")
 ]
 
-# Where the trained fraud model lives
-_model_path = Path(os.getenv("FRAUD_MODEL_PATH", "ml/artifacts/model.pkl"))
-FRAUD_MODEL_PATH = _model_path if _model_path.is_absolute() else ROOT / _model_path
+
+def _resolve(path_text: str) -> Path:
+    """Relative paths are measured from the project root."""
+    path = Path(path_text)
+    return path if path.is_absolute() else ROOT / path
+
+
+# Where the trained models live
+FRAUD_MODEL_PATH = _resolve(os.getenv("FRAUD_MODEL_PATH", "ml/artifacts/model.pkl"))
+SCAM_MODEL_PATH = _resolve(os.getenv("SCAM_MODEL_PATH", "ml/artifacts/scam_model.pkl"))

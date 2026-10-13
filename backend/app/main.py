@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app import models  # noqa: F401  (makes sure the tables are known)
 from app.config import ALLOWED_ORIGINS
 from app.database import Base, engine
-from app.routers import health, predict, stats, transactions
+from app.routers import health, predict, scam, stats, transactions
 
 
 @asynccontextmanager
@@ -31,4 +31,4 @@ app.include_router(health.router)
 app.include_router(predict.router)
 app.include_router(transactions.router)
 app.include_router(stats.router)
-
+app.include_router(scam.router)

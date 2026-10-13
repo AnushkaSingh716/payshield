@@ -1,6 +1,30 @@
+import { useState } from 'react'
 import Dashboard from './pages/Dashboard'
+import ScamChecker from './pages/ScamChecker'
+
+const TABS = [
+  { id: 'dashboard', label: 'Fraud Detector' },
+  { id: 'scam', label: 'Scam Checker' },
+]
+
+// Headline text for each page
+const HERO = {
+  dashboard: {
+    before: 'Spot sketchy payments',
+    highlight: 'before they spot you',
+    sub: 'Drop in a transaction. Our AI vibe-checks it in a second.',
+  },
+  scam: {
+    before: 'Got a weird text?',
+    highlight: 'Paste it, we will check it',
+    sub: 'Fake KYC, lottery, UPI refund and OTP scams get caught here.',
+  },
+}
 
 export default function App() {
+  const [page, setPage] = useState('dashboard')
+  const hero = HERO[page]
+
   return (
     <div className="relative min-h-screen overflow-hidden">
       {/* Glowing colour blobs floating in the background */}
@@ -9,29 +33,45 @@ export default function App() {
       <div className="pointer-events-none absolute bottom-0 left-1/3 h-96 w-96 animate-blob rounded-full bg-cyan-500/25 blur-3xl [animation-delay:-8s]" />
 
       <header className="relative z-10 mx-auto max-w-6xl px-4 pt-8">
-        <div className="glass flex items-center justify-between px-5 py-4">
+        <div className="glass flex flex-wrap items-center justify-between gap-3 px-5 py-4">
           <h1 className="text-2xl font-bold tracking-tight">
             <span className="gradient-text">PayShield</span>
           </h1>
-          <span className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-sm text-violet-200 sm:flex">
-            <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.9)]" />
-            Live fraud radar
-          </span>
+
+          <nav className="flex gap-2">
+            {TABS.map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setPage(tab.id)}
+                className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+                  page === tab.id
+                    ? 'bg-white/15 text-white shadow-[0_0_18px_rgba(167,139,250,0.35)]'
+                    : 'text-violet-200 hover:bg-white/10'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </nav>
         </div>
 
         <div className="mt-10 text-center">
           <h2 className="text-4xl font-bold sm:text-5xl">
-            Spot sketchy payments{' '}
-            <span className="gradient-text">before they spot you</span>
+            {hero.before} <span className="gradient-text">{hero.highlight}</span>
           </h2>
-          <p className="mt-3 text-violet-200/80">
-            Drop in a transaction. Our AI vibe-checks it in a second.
-          </p>
+          <p className="mt-3 text-violet-200/80">{hero.sub}</p>
         </div>
       </header>
 
+      {/* Both pages stay loaded, so you don't lose your results when switching tabs */}
       <main className="relative z-10 mx-auto max-w-6xl px-4 py-8">
-        <Dashboard />
+        <div className={page === 'dashboard' ? '' : 'hidden'}>
+          <Dashboard />
+        </div>
+        <div className={page === 'scam' ? '' : 'hidden'}>
+          <ScamChecker />
+        </div>
       </main>
     </div>
   )

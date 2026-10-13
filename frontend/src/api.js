@@ -40,3 +40,11 @@ export function getTransactions(limit = 20) {
 export function getStats() {
   return request('/stats')
 }
+
+export function checkMessage(text) {
+  return request('/check-message', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text }),
+  })
+}

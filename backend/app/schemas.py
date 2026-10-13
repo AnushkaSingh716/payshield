@@ -38,10 +38,10 @@ class PredictionOut(BaseModel):
 
 
 class Reason(BaseModel):
-    """One plain-English reason behind a prediction."""
+    """One plain-English reason behind a result."""
 
     text: str
-    direction: str  # "increases" or "decreases" the fraud risk
+    direction: str  # "increases" or "decreases" the risk
 
 
 class Contribution(BaseModel):
@@ -66,3 +66,23 @@ class StatsOut(BaseModel):
     suspicious: int
     fraud: int
     fraud_rate: float  # percent of all checked transactions
+
+
+class MessageIn(BaseModel):
+    """What the user sends to POST /check-message."""
+
+    model_config = ConfigDict(str_strip_whitespace=True)
+
+    text: str = Field(min_length=3, max_length=2000)
+
+
+class ScamCheckOut(BaseModel):
+    """What POST /check-message returns."""
+
+    id: int
+    risk_score: float          # 0 to 100
+    label: str                 # Safe / Suspicious / Scam
+    text_score: float          # how scammy the wording looks, 0 to 100
+    link_score: float          # how risky the links look, 0 to 100
+    reasons: list[Reason]
+    urls_found: list[str]
