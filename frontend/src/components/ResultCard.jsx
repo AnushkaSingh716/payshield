@@ -1,3 +1,5 @@
+import ReasonsChart from './ReasonsChart'
+
 // Colors for each label. (Full class names are written out so Tailwind can find them.)
 const STYLES = {
   Safe: {
@@ -36,6 +38,7 @@ export default function ResultCard({ result }) {
 
   const style = STYLES[result.label] || STYLES.Suspicious
   const percent = (result.fraud_probability * 100).toFixed(1)
+  const reasons = result.reasons || []
 
   return (
     // key={result.id} replays the pop-in animation for every new result
@@ -61,6 +64,29 @@ export default function ResultCard({ result }) {
           style={{ width: `${Math.min(100, result.fraud_probability * 100)}%` }}
         />
       </div>
+
+      {/* Plain-English reasons from SHAP */}
+      {reasons.length > 0 && (
+        <div className="mt-5">
+          <p className="mb-2 text-xs uppercase tracking-wide text-violet-200/60">
+            Why this result
+          </p>
+          <ul className="space-y-2">
+            {reasons.map((r, i) => (
+              <li key={i} className="flex items-start gap-3 text-sm text-violet-50">
+                <span
+                  className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${
+                    r.direction === 'increases' ? 'bg-rose-400' : 'bg-emerald-400'
+                  }`}
+                />
+                <span>{r.text}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <ReasonsChart contributions={result.contributions} />
 
       <p className="mt-4 text-sm text-violet-200/70">
         ₹{result.amount.toLocaleString('en-IN')} at {result.hour}:00 · transaction #{result.id}

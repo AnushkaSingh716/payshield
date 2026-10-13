@@ -18,7 +18,7 @@ class TransactionIn(BaseModel):
 
 
 class PredictionOut(BaseModel):
-    """One prediction, as returned by the API."""
+    """One saved prediction, as returned by the history endpoint."""
 
     model_config = ConfigDict(from_attributes=True)  # lets us build it from a DB row
 
@@ -35,6 +35,27 @@ class PredictionOut(BaseModel):
     account_age_days: int
     fraud_probability: float
     label: str
+
+
+class Reason(BaseModel):
+    """One plain-English reason behind a prediction."""
+
+    text: str
+    direction: str  # "increases" or "decreases" the fraud risk
+
+
+class Contribution(BaseModel):
+    """How much one factor pushed the score (positive = toward fraud)."""
+
+    feature: str
+    impact: float
+
+
+class PredictResponse(PredictionOut):
+    """What POST /predict returns: the prediction plus its explanation."""
+
+    reasons: list[Reason] = []
+    contributions: list[Contribution] = []
 
 
 class StatsOut(BaseModel):

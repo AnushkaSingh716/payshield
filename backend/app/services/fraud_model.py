@@ -27,13 +27,17 @@ def get_model():
     return _model
 
 
-def predict_probability(data: dict) -> float:
-    """Return the chance (0 to 1) that this transaction is fraud."""
+def build_frame(data: dict) -> pd.DataFrame:
+    """Turn one transaction (a dict) into the one-row table the model expects."""
     row = dict(data)
     row["is_new_device"] = int(row["is_new_device"])        # True/False -> 1/0
     row["is_international"] = int(row["is_international"])
-    frame = pd.DataFrame([row])[FEATURES]                    # right column order
-    return float(get_model().predict_proba(frame)[0, 1])
+    return pd.DataFrame([row])[FEATURES]                     # right column order
+
+
+def predict_probability(data: dict) -> float:
+    """Return the chance (0 to 1) that this transaction is fraud."""
+    return float(get_model().predict_proba(build_frame(data))[0, 1])
 
 
 def label_for(probability: float) -> str:

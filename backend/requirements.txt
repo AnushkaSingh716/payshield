@@ -1,12 +1,13 @@
 fastapi
 uvicorn[standard]
 sqlalchemy
-psycopg2-binary
+psycopg[binary]
 python-dotenv
 pydantic
 joblib
 pandas
 scikit-learn
 xgboost
+shap
 pytest
 httpx
