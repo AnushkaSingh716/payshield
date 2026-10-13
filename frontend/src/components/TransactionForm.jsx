@@ -2,12 +2,12 @@ import { useState } from 'react'
 
 // The number fields on the form. "name" must match what the backend expects.
 const NUMBER_FIELDS = [
-  { name: 'amount', label: 'Amount (₹)', min: 0.01, step: 0.01 },
-  { name: 'avg_amount_30d', label: 'Usual average spend (₹)', min: 0.01, step: 0.01 },
-  { name: 'hour', label: 'Hour of day (0-23)', min: 0, max: 23, step: 1 },
-  { name: 'distance_from_home_km', label: 'Distance from home (km)', min: 0, step: 0.1 },
-  { name: 'txn_count_24h', label: 'Transactions in last 24h', min: 0, step: 1 },
-  { name: 'account_age_days', label: 'Account age (days)', min: 0, step: 1 },
+  { name: 'amount', label: 'Amount (₹)', icon: '💸', min: 0.01, step: 0.01 },
+  { name: 'avg_amount_30d', label: 'Usual average spend (₹)', icon: '📊', min: 0.01, step: 0.01 },
+  { name: 'hour', label: 'Hour of day (0-23)', icon: '🕒', min: 0, max: 23, step: 1 },
+  { name: 'distance_from_home_km', label: 'Distance from home (km)', icon: '📍', min: 0, step: 0.1 },
+  { name: 'txn_count_24h', label: 'Transactions in last 24h', icon: '🔁', min: 0, step: 1 },
+  { name: 'account_age_days', label: 'Account age (days)', icon: '🎂', min: 0, step: 1 },
 ]
 
 const EMPTY = {
@@ -67,23 +67,25 @@ export default function TransactionForm({ onSubmit, loading }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-xl bg-white p-6 shadow">
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <h2 className="text-lg font-semibold">Check a transaction</h2>
-        <div className="flex gap-2 text-sm">
+    <form onSubmit={handleSubmit} className="glass p-6">
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+        <h2 className="text-xl font-bold">
+          <span className="gradient-text">Check a transaction</span>
+        </h2>
+        <div className="flex gap-2">
           <button
             type="button"
             onClick={() => setForm(EXAMPLES.normal)}
-            className="rounded border border-slate-300 px-3 py-1 hover:bg-slate-50"
+            className="chip"
           >
-            Fill normal example
+            😇 Normal example
           </button>
           <button
             type="button"
             onClick={() => setForm(EXAMPLES.risky)}
-            className="rounded border border-slate-300 px-3 py-1 hover:bg-slate-50"
+            className="chip"
           >
-            Fill risky example
+            😈 Risky example
           </button>
         </div>
       </div>
@@ -91,7 +93,9 @@ export default function TransactionForm({ onSubmit, loading }) {
       <div className="grid gap-4 sm:grid-cols-2">
         {NUMBER_FIELDS.map((f) => (
           <label key={f.name} className="block text-sm">
-            <span className="mb-1 block font-medium">{f.label}</span>
+            <span className="mb-1 block font-medium text-violet-200">
+              {f.icon} {f.label}
+            </span>
             <input
               type="number"
               name={f.name}
@@ -101,39 +105,41 @@ export default function TransactionForm({ onSubmit, loading }) {
               max={f.max}
               step={f.step}
               required
-              className="w-full rounded border border-slate-300 px-3 py-2 focus:border-slate-500 focus:outline-none"
+              className="field"
             />
           </label>
         ))}
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-6 text-sm">
-        <label className="flex items-center gap-2">
+      <div className="mt-5 flex flex-wrap gap-3 text-sm">
+        <label className="flex cursor-pointer items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 hover:bg-white/10">
           <input
             type="checkbox"
             name="is_new_device"
             checked={form.is_new_device}
             onChange={handleChange}
+            className="h-4 w-4 accent-pink-500"
           />
-          New device
+          📱 New device
         </label>
-        <label className="flex items-center gap-2">
+        <label className="flex cursor-pointer items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 hover:bg-white/10">
           <input
             type="checkbox"
             name="is_international"
             checked={form.is_international}
             onChange={handleChange}
+            className="h-4 w-4 accent-pink-500"
           />
-          International transaction
+          🌍 International
         </label>
       </div>
 
       <button
         type="submit"
         disabled={loading}
-        className="mt-6 rounded-lg bg-slate-900 px-5 py-2 font-medium text-white hover:bg-slate-700 disabled:opacity-50"
+        className="btn-glow mt-6 rounded-2xl px-6 py-3 font-semibold text-white"
       >
-        {loading ? 'Checking...' : 'Check transaction'}
+        {loading ? 'Checking...' : '⚡ Check transaction'}
       </button>
     </form>
   )

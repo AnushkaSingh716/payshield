@@ -50,8 +50,8 @@ export default function Dashboard() {
   return (
     <div className="space-y-6">
       {error && (
-        <div className="rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-red-700">
-          {error}
+        <div className="rounded-2xl border border-rose-400/40 bg-rose-500/10 px-4 py-3 text-rose-200">
+          😵 {error}
         </div>
       )}
 

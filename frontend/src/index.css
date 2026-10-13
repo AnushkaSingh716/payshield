@@ -1,1 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
+
+/* Use the Space Grotesk font everywhere */
+@theme {
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background: #0b0618;
+  color: #f5f3ff;
+  color-scheme: dark; /* dark number spinners and scrollbars */
+}
+
+/* Frosted-glass card */
+.glass {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+/* Rainbow gradient text */
+.gradient-text {
+  background-image: linear-gradient(90deg, #a78bfa, #f472b6, #22d3ee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Text boxes */
+.field {
+  width: 100%;
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 0.65rem 0.9rem;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.field:focus {
+  border-color: #f472b6;
+  box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.25);
+}
+
+/* Glowing main button */
+.btn-glow {
+  background-image: linear-gradient(90deg, #8b5cf6, #ec4899);
+  box-shadow: 0 0 24px rgba(236, 72, 153, 0.45);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn-glow:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 36px rgba(236, 72, 153, 0.7);
+}
+.btn-glow:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Small pill buttons */
+.chip {
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.35rem 0.9rem;
+  font-size: 0.85rem;
+  transition: background 0.15s, transform 0.15s;
+}
+.chip:hover {
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-1px);
+}
+
+/* Floating background blobs */
+@keyframes blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -40px) scale(1.1); }
+}
+.animate-blob {
+  animation: blob 12s ease-in-out infinite;
+}
+
+/* Result card pops in */
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(0.92) translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+.pop-in {
+  animation: pop-in 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}

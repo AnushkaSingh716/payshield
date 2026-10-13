@@ -1,7 +1,7 @@
 const BADGES = {
-  Safe: 'bg-green-100 text-green-700',
-  Suspicious: 'bg-amber-100 text-amber-700',
-  Fraud: 'bg-red-100 text-red-700',
+  Safe: 'border-emerald-400/30 bg-emerald-400/15 text-emerald-300',
+  Suspicious: 'border-amber-400/30 bg-amber-400/15 text-amber-300',
+  Fraud: 'border-rose-400/30 bg-rose-500/15 text-rose-300',
 }
 
 // The backend sends times in UTC without a "Z"; add it so the browser shows local time.
@@ -12,16 +12,18 @@ function formatTime(value) {
 
 export default function HistoryTable({ rows }) {
   return (
-    <div className="rounded-xl bg-white p-6 shadow">
-      <h2 className="mb-4 text-lg font-semibold">Recent transactions</h2>
+    <div className="glass p-6">
+      <h2 className="mb-4 text-xl font-bold">
+        <span className="gradient-text">Recent transactions</span> 🧾
+      </h2>
 
       {rows.length === 0 ? (
-        <p className="text-slate-500">No transactions yet.</p>
+        <p className="text-violet-200/70">Nothing here yet. Go check a transaction!</p>
       ) : (
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
+          <table className="w-full text-left text-sm text-violet-100">
             <thead>
-              <tr className="border-b border-slate-200 text-slate-500">
+              <tr className="border-b border-white/10 text-violet-300/70">
                 <th className="py-2 pr-4">#</th>
                 <th className="py-2 pr-4">Time</th>
                 <th className="py-2 pr-4">Amount (₹)</th>
@@ -33,16 +35,16 @@ export default function HistoryTable({ rows }) {
             </thead>
             <tbody>
               {rows.map((r) => (
-                <tr key={r.id} className="border-b border-slate-100">
-                  <td className="py-2 pr-4">{r.id}</td>
-                  <td className="py-2 pr-4">{formatTime(r.created_at)}</td>
-                  <td className="py-2 pr-4">{r.amount.toLocaleString('en-IN')}</td>
-                  <td className="py-2 pr-4">{r.hour}</td>
-                  <td className="py-2 pr-4">{r.distance_from_home_km}</td>
-                  <td className="py-2 pr-4">{(r.fraud_probability * 100).toFixed(1)}%</td>
-                  <td className="py-2 pr-4">
+                <tr key={r.id} className="border-b border-white/5 hover:bg-white/5">
+                  <td className="py-3 pr-4">{r.id}</td>
+                  <td className="py-3 pr-4">{formatTime(r.created_at)}</td>
+                  <td className="py-3 pr-4">{r.amount.toLocaleString('en-IN')}</td>
+                  <td className="py-3 pr-4">{r.hour}</td>
+                  <td className="py-3 pr-4">{r.distance_from_home_km}</td>
+                  <td className="py-3 pr-4">{(r.fraud_probability * 100).toFixed(1)}%</td>
+                  <td className="py-3 pr-4">
                     <span
-                      className={`rounded-full px-2 py-1 text-xs font-medium ${BADGES[r.label]}`}
+                      className={`rounded-full border px-3 py-1 text-xs font-semibold ${BADGES[r.label]}`}
                     >
                       {r.label}
                     </span>
