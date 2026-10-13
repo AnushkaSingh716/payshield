@@ -14,7 +14,7 @@ export default function HistoryTable({ rows }) {
   return (
     <div className="glass p-6">
       <h2 className="mb-4 text-xl font-bold">
-        <span className="gradient-text">Recent transactions</span> 🧾
+        <span className="gradient-text">Recent transactions</span>
       </h2>
 
       {rows.length === 0 ? (

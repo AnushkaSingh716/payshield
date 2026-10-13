@@ -23,14 +23,14 @@ export default function FraudChart({ stats }) {
   return (
     <div className="glass p-6">
       <h2 className="mb-4 text-xl font-bold">
-        <span className="gradient-text">Fraud vs legit</span> 📈
+        <span className="gradient-text">Fraud vs legit</span>
       </h2>
 
       <div className="mb-5 grid grid-cols-2 gap-4 sm:grid-cols-4">
-        <StatBox emoji="📊" label="Total checked" value={stats.total} />
-        <StatBox emoji="😎" label="Safe" value={stats.safe} />
-        <StatBox emoji="🚨" label="Fraud" value={stats.fraud} />
-        <StatBox emoji="🎯" label="Fraud rate" value={`${stats.fraud_rate}%`} />
+        <StatBox label="Total checked" value={stats.total} />
+        <StatBox label="Safe" value={stats.safe} />
+        <StatBox label="Fraud" value={stats.fraud} />
+        <StatBox label="Fraud rate" value={`${stats.fraud_rate}%`} />
       </div>
 
       {stats.total === 0 ? (
@@ -72,12 +72,10 @@ export default function FraudChart({ stats }) {
   )
 }
 
-function StatBox({ emoji, label, value }) {
+function StatBox({ label, value }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-      <p className="text-xs text-violet-200/70">
-        {emoji} {label}
-      </p>
+      <p className="text-xs text-violet-200/70">{label}</p>
       <p className="mt-1 text-2xl font-bold">{value}</p>
     </div>
   )

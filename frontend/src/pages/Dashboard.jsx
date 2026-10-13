@@ -51,7 +51,7 @@ export default function Dashboard() {
     <div className="space-y-6">
       {error && (
         <div className="rounded-2xl border border-rose-400/40 bg-rose-500/10 px-4 py-3 text-rose-200">
-          😵 {error}
+          {error}
         </div>
       )}
 

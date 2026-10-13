@@ -10,18 +10,19 @@ export default function App() {
 
       <header className="relative z-10 mx-auto max-w-6xl px-4 pt-8">
         <div className="glass flex items-center justify-between px-5 py-4">
-          <h1 className="text-2xl font-bold">
-            🛡️ <span className="gradient-text">PayShield</span>
+          <h1 className="text-2xl font-bold tracking-tight">
+            <span className="gradient-text">PayShield</span>
           </h1>
-          <span className="hidden rounded-full border border-white/15 bg-white/5 px-3 py-1 text-sm text-violet-200 sm:inline">
-            <span className="text-emerald-400">●</span> Live fraud radar
+          <span className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-sm text-violet-200 sm:flex">
+            <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.9)]" />
+            Live fraud radar
           </span>
         </div>
 
         <div className="mt-10 text-center">
           <h2 className="text-4xl font-bold sm:text-5xl">
             Spot sketchy payments{' '}
-            <span className="gradient-text">before they spot you</span> 👀
+            <span className="gradient-text">before they spot you</span>
           </h2>
           <p className="mt-3 text-violet-200/80">
             Drop in a transaction. Our AI vibe-checks it in a second.
