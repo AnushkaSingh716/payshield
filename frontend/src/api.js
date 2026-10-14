@@ -48,3 +48,17 @@ export function checkMessage(text) {
     body: JSON.stringify({ text }),
   })
 }
+
+// kind: "transaction" or "message"
+// action: "report_fraud", "this_was_me" or "report_wrong"
+export function sendFeedback({ kind, target_id, action }) {
+  return request('/feedback', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ kind, target_id, action }),
+  })
+}
+
+export function getFeedbackStats() {
+  return request('/feedback/stats')
+}

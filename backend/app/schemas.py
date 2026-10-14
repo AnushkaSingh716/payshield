@@ -1,5 +1,6 @@
 """Pydantic schemas: they check incoming data and shape outgoing data."""
 from datetime import datetime
+from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -86,3 +87,33 @@ class ScamCheckOut(BaseModel):
     link_score: float          # how risky the links look, 0 to 100
     reasons: list[Reason]
     urls_found: list[str]
+
+
+class FeedbackIn(BaseModel):
+    """What the user sends to POST /feedback."""
+
+    kind: Literal["transaction", "message"]
+    target_id: int = Field(gt=0, description="ID of the prediction or scam check")
+    action: Literal["report_fraud", "this_was_me", "report_wrong"]
+
+
+class FeedbackOut(BaseModel):
+    """What POST /feedback returns."""
+
+    id: int
+    kind: str
+    target_id: int
+    action: str
+    user_label: int   # the label we saved: 1 = fraud/scam, 0 = legit
+    updated: bool     # True if this replaced an earlier answer for the same item
+
+
+class FeedbackStats(BaseModel):
+    """Numbers for the Feedback stats panel."""
+
+    total: int
+    fraud_reports: int
+    this_was_me: int
+    wrong_result_reports: int
+    fraud_model_version: str
+    scam_model_version: str

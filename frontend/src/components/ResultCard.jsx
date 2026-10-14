@@ -1,3 +1,4 @@
+import FeedbackButtons from './FeedbackButtons'
 import ReasonsChart from './ReasonsChart'
 
 // Colors for each label. (Full class names are written out so Tailwind can find them.)
@@ -87,6 +88,8 @@ export default function ResultCard({ result }) {
       )}
 
       <ReasonsChart contributions={result.contributions} />
+
+      <FeedbackButtons kind="transaction" targetId={result.id} />
 
       <p className="mt-4 text-sm text-violet-200/70">
         ₹{result.amount.toLocaleString('en-IN')} at {result.hour}:00 · transaction #{result.id}

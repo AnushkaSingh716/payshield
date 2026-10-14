@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Dashboard from './pages/Dashboard'
 import ScamChecker from './pages/ScamChecker'
+import FeedbackStats from './components/FeedbackStats'
 
 const TABS = [
   { id: 'dashboard', label: 'Fraud Detector' },
@@ -71,6 +72,11 @@ export default function App() {
         </div>
         <div className={page === 'scam' ? '' : 'hidden'}>
           <ScamChecker />
+        </div>
+
+        {/* Shown under both pages */}
+        <div className="mt-6">
+          <FeedbackStats />
         </div>
       </main>
     </div>

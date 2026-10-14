@@ -1,3 +1,5 @@
+import FeedbackButtons from './FeedbackButtons'
+
 // Colors for each label. (Full class names are written out so Tailwind can find them.)
 const STYLES = {
   Safe: {
@@ -110,6 +112,8 @@ export default function ScamResultCard({ result }) {
           </ul>
         </div>
       )}
+
+      <FeedbackButtons kind="message" targetId={result.id} />
     </div>
   )
 }

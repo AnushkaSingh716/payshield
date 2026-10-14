@@ -29,3 +29,7 @@ Thumbs.db
 
 # Local SQLite databases
 *.db
+
+
+# Backups of previous models (created by retrain.py)
+ml/artifacts/*_previous.pkl
