@@ -1,5 +1,6 @@
 """Loads the scam text model (TF-IDF + Logistic Regression)."""
 import joblib
+from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
 
 from app.config import SCAM_MODEL_PATH
 
@@ -40,7 +41,8 @@ def top_scam_words(text: str, n: int = 4) -> list[str]:
         if value <= 0:
             break
         word = names[index]
-        if " " in word or word in LINK_PIECES:  # keep single, meaningful words
+        # Keep single, meaningful words (skip phrases, link pieces and filler like "to")
+        if " " in word or word in LINK_PIECES or word in ENGLISH_STOP_WORDS:
             continue
         words.append(word)
         if len(words) >= n:
