@@ -1,0 +1,14 @@
+# Keeps the backend image small and keeps secrets out of it
+.git
+.venv
+**/__pycache__
+**/*.pyc
+.env
+.env.*
+mlruns
+mlflow.db
+*.db
+ml/data
+ml/artifacts/*_previous.pkl
+frontend
+.vscode
