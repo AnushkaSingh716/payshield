@@ -7,7 +7,9 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me}
       POSTGRES_DB: ${POSTGRES_DB:-payshield}
     ports:
-      - "5432:5432"            # lets scripts on your computer (like retrain.py) reach it
+      # Port on YOUR computer : port inside the container.
+      # Defaults to 5432; change it with DB_PORT in the .env file.
+      - "${DB_PORT:-5432}:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data   # keeps your data when containers restart
     healthcheck:
