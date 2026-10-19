@@ -12,15 +12,15 @@ PayShield takes a payment transaction, predicts whether it is fraudulent, explai
 
 **Fraud detection with explanations**
 
-![Fraud dashboard](docs/screenshots/dashboard-fraud.png)
+![Fraud dashboard](docs/screenshots/dashboard-fraud.png.png)
 
 **Scam message checker**
 
-![Scam checker](docs/screenshots/scam-checker.png)
+![Scam checker](docs/screenshots/scam-checker.png.png)
 
 **Feedback stats**
 
-![Feedback stats](docs/screenshots/feedback-stats.png)
+![Feedback stats](docs/screenshots/feedback-stats.png.png)
 
 ## Features
 
