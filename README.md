@@ -6,7 +6,10 @@
 
 PayShield takes a payment transaction, predicts whether it is fraudulent, explains why, and shows the result in a dashboard. It also checks suspicious SMS and WhatsApp messages and links for common Indian scams (fake KYC, lottery, UPI refund and OTP messages).
 
-> **Live demo:** coming soon (added after deployment)
+> > **Live demo:** https://payshield-xyz.vercel.app
+> **API docs:** https://payshield-api.onrender.com/docs
+>
+
 
 ## Screenshots
 
@@ -274,7 +277,25 @@ The backend has 24 tests covering health, prediction, explanations, the scam che
 | CORS error in the browser console | Open the app at exactly `http://localhost:3000` (Docker) or `http://localhost:5173` (dev), not `127.0.0.1` |
 | `relation "feedback" does not exist` | Restart the backend so it creates the new tables |
 | `retrain.py` says it could not reach the database | Start the database with `docker compose up db -d` |
-| "Cannot connect to the Docker daemon" | Open Docker Desktop and wait until it says it is running |
+| "Cannot connect to the Docker daemon" | Open Docker Desktop and wait until it says it is running 
+
+## Deployment
+
+| Part | Host | Notes |
+|---|---|---|
+| Frontend | Vercel | Built from the `frontend` folder |
+| Backend API | Render (Docker web service) | Built from `backend/Dockerfile` |
+| Database | Render PostgreSQL | Tables are created automatically on startup |
+
+Environment variables:
+
+| Where | Name | Value |
+|---|---|---|
+| Render (backend) | `DATABASE_URL` | Internal Database URL of the Render Postgres instance |
+| Render (backend) | `ALLOWED_ORIGINS` | The Vercel site address, for example `https://your-app.vercel.app` |
+| Vercel (frontend) | `VITE_API_URL` | The Render API address, for example `https://your-api.onrender.com` |
+
+
 
 ## Limitations
 
