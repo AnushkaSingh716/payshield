@@ -6,8 +6,8 @@
 
 PayShield takes a payment transaction, predicts whether it is fraudulent, explains why, and shows the result in a dashboard. It also checks suspicious SMS and WhatsApp messages and links for common Indian scams (fake KYC, lottery, UPI refund and OTP messages).
 
-> > **Live demo:** https://payshield-xyz.vercel.app
-> **API docs:** https://payshield-api.onrender.com/docs
+> > **Live demo:** https://payshield-psi.vercel.app/
+> **API docs:** https://payshield-api-0eaf.onrender.com/docs
 >
 
 
