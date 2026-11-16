@@ -9,8 +9,6 @@ PayShield takes a payment transaction, predicts whether it is fraudulent, explai
 > > **Live demo:** https://payshield-psi.vercel.app/
 > **API docs:** https://payshield-api-0eaf.onrender.com/docs
 >
-
-
 ## Screenshots
 
 **Fraud detection with explanations**
@@ -76,6 +74,12 @@ The first build takes a few minutes. Then open:
 
 - Dashboard: http://localhost:3000
 - API docs: http://localhost:8000/docs
+
+## Production Deployment
+
+- Frontend: https://payshield-r13zgdb6v-anush16.vercel.app
+- Backend: https://payshield-api-0eaf.onrender.com
+- API Documentation: https://payshield-api-0eaf.onrender.com/docs
 
 Stop with `Ctrl+C`, then `docker compose down` (your data is kept). Use `docker compose down -v` to also wipe the database.
 
@@ -291,9 +295,9 @@ Environment variables:
 
 | Where | Name | Value |
 |---|---|---|
-| Render (backend) | `DATABASE_URL` | Internal Database URL of the Render Postgres instance |
-| Render (backend) | `ALLOWED_ORIGINS` | The Vercel site address, for example `https://your-app.vercel.app` |
-| Vercel (frontend) | `VITE_API_URL` | The Render API address, for example `https://your-api.onrender.com` |
+| Render (backend) | `DATABASE_URL` | postgresql://payshield_db_user:jugvQ9qPbdEJ7vGR6PnU6cO47Y5iIabI@dpg-dbccldqfngtc739pcp10-a/payshield_db |
+| Render (backend) | `ALLOWED_ORIGINS` | `https://payshield-api-0eaf.onrender.com` |
+| Vercel (frontend) | `VITE_API_URL` | `https://payshield-r13zgdb6v-anush16.vercel.app` |
 
 
 
